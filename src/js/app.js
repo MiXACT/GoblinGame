@@ -3,9 +3,10 @@ import ClickHandler from './clickHandler';
 
 let curBox;
 let newBox;
-const goblinOn = 'box goblin';
-const goblinOff = 'box';
 const attemptsLimit = 5;
+const goblin = new Goblin(attemptsLimit);
+const click = new ClickHandler('.playground');
+console.log(click);
 const gameOn = setInterval(() => {
 	do {
 		newBox = Math.floor(Math.random() * 16) + 1;
@@ -13,12 +14,12 @@ const gameOn = setInterval(() => {
 
 	try {
 		goblin.goblinOff(curBox);
-	}
-	catch (err) {
+	} catch (err) {
 		if (err.message === 'Counter limitation') {
 			alert('GAME OVER!');
 			clearInterval(gameOn);
-			// удаление значения переменной для прекращения отображения Гоблина после сообщения "GAME OVER!"
+			// удаление значения переменной для прекращения
+			// отображения Гоблина после сообщения "GAME OVER!"
 			newBox = undefined;
 		}
 	}
@@ -26,6 +27,4 @@ const gameOn = setInterval(() => {
 	curBox = newBox;
 }, 1000);
 
-new ClickHandler('.playground');
-const goblin = new Goblin(attemptsLimit);
-gameOn;
+gameOn();
